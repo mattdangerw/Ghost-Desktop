@@ -20,6 +20,7 @@
     "installer-32": "grunt installer-32",
     "installer-64": "grunt installer-32",
     "debian": "grunt debian",
+    "flatpak": "grunt flatpak",
     "dmg": "grunt dmg",
     "lint": "eslint './main/**/*.js' './app/**/*.js'"
   },
@@ -30,7 +31,8 @@
   "author": "",
   "license": "MIT",
   "optionalDependencies": {
-    "grunt-electron-installer-debian": "^0.3.0"
+    "grunt-electron-installer-debian": "^0.3.0",
+    "grunt-electron-installer-flatpak": "^0.4.0"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.0",
