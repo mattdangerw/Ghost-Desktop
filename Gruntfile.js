@@ -18,6 +18,7 @@ const configureGrunt = function (grunt) {
     // Optional, platform specific grunt plugins.
     if (process.platform === 'linux') {
         grunt.loadNpmTasks('grunt-electron-installer-debian');
+        grunt.loadNpmTasks('grunt-electron-installer-flatpak');
     }
 
     const config = {
@@ -133,6 +134,22 @@ const configureGrunt = function (grunt) {
             }
         },
 
+        'electron-installer-flatpak': {
+            app: {
+                options: {
+                    id: 'org.ghost.Ghost',
+                    name: 'Ghost',
+                    genericName: 'Blogging Software',
+                    arch: 'x86_64',
+                    icon: `${__dirname}/assets/icons/ghost-osx.png`,
+                    bin: 'Ghost',
+                    description: 'A beautiful desktop application enabling you to easily manage multiple Ghost blogs and work without distractions.'
+                },
+                src: './electron-builds/Ghost-linux-x64',
+                dest: './electron-builds/Ghost-linux-x64-installer'
+            }
+        },
+
         trimtrailingspaces: {
             main: {
                 src: ['app/**/*.js', 'tests/**/*.js', 'scripts/**/*.js', 'Gruntfile.js', 'main/**/*.js'],
@@ -156,6 +173,7 @@ const configureGrunt = function (grunt) {
     grunt.registerTask('installer', 'Create Windows Installers for Ghost', ['installer-32', 'installer-64']);
     grunt.registerTask('mas', ['clean:builds64', 'shell:fetchContributors', 'shell:mas']);
     grunt.registerTask('debian', ['clean:builds64', 'shell:fetchContributors', 'shell:build', 'electron-installer-debian']);
+    grunt.registerTask('flatpak', ['clean:builds64', 'shell:fetchContributors', 'shell:build', 'electron-installer-flatpak']);
     grunt.registerTask('dmg', 'Create an OS X dmg for Ghost', ['shell:fetchContributors', 'shell:build', 'shell:dmg']);
 };
 
